@@ -1,5 +1,6 @@
 from math import lcm
 
+
 with open("input.txt", "r") as file:
     lines = file.read()
 
