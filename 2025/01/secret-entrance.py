@@ -1,21 +1,18 @@
 with open("input.txt", "r") as file:
     lines = file.readlines()
 
-lines = [line.split() for line in lines]
+rotations = [(rote[0], int(rote[1:])) for rote in lines]
 
-rotations = [(rot[0], int(rot[1:])) for line in lines for rot in line]
-
-turns = 0
-
+zeros = 0
 dial = 50
 
-for rot in rotations:
-    if rot[0] == "R":
-        dial = (dial + rot[1]) % 100
-    elif rot[0] == "L":
-        dial = (dial - rot[1]) % 100
+for rote in rotations:
+    if rote[0] == "R":
+        dial = (dial + rote[1]) % 100
+    else:
+        dial = (dial - rote[1]) % 100
 
     if dial == 0:
-        turns += 1
+        zeros += 1
 
-print(turns)
+print(zeros)
