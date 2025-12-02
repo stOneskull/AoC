@@ -3,25 +3,40 @@ with open("input.txt", "r") as file:
 
 lines = lines.split(',')
 
-invalids = set()
+ranges = []
+
+max_stop = 0
 
 for eachrange in lines:
-    start, stop = eachrange.split('-')
-    start = int(start)
-    stop = int(stop)
-    
-    for num in range(start, stop+1):
-        #if num < 11:
-            #continue
-        num_str = str(num)
-        num_len = len(num_str)
+    start, stop = map(int, eachrange.split('-'))
+    ranges.append((start, stop))
+    if stop > max_stop:
+        max_stop = stop
 
-        for repeat_len in range(1, num_len//2 + 1):
-            if num_len % repeat_len == 0:
-                repeat = num_str[:repeat_len]
-                repeats = num_len // repeat_len
-                if repeat * repeats == num_str:
-                    invalids.add(num)
-                    break 
+max_len = len(str(max_stop))
 
-print(sum(invalids))
+invalids = set()
+
+for repeat_len in range(1, max_len//2 + 1):
+    for n in range(10**(repeat_len-1), 10**repeat_len):
+        repeat = str(n)
+        for repeats in range(2, max_len//repeat_len + 1):
+            num_str = repeat * repeats
+            num = int(num_str)
+            if num > max_stop:
+                break
+            invalids.add(num)
+
+sorted_invalids = sorted(invalids)
+
+final_invalids = set()
+
+for start, stop in ranges:
+    for num in sorted_invalids:
+        if num > stop:
+            break
+        if num >= start:
+            final_invalids.add(num)
+
+
+print(sum(final_invalids))

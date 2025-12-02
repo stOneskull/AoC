@@ -3,18 +3,39 @@ with open("input.txt", "r") as file:
 
 lines = lines.split(',')
 
-invalids = set()
+ranges = []
+
+max_stop = 0
 
 for eachrange in lines:
-    start, stop = eachrange.split('-')
-    start = int(start)
-    stop = int(stop)
-    
-    for num in range(start, stop+1):
-        num_str = str(num)
-        if (num_len := len(num_str)) % 2:
-            continue
-        if num_str[:num_len // 2] == num_str[num_len // 2:]:
-            invalids.add(num)
+    start, stop = map(int, eachrange.split('-'))
+    ranges.append((start, stop))
+    if stop > max_stop:
+        max_stop = stop
 
-print(sum(invalids))
+max_len = len(str(max_stop))
+
+invalids = set()
+
+
+for repeat_len in range(1, max_len//2 + 1):
+    for n in range(10**(repeat_len - 1), 10**repeat_len):
+        repeat = str(n)
+        num = int(repeat + repeat)
+        if num > max_stop:
+            break
+        invalids.add(num)
+
+sorted_invalids = sorted(invalids)
+
+final_invalids = set()
+
+for start, stop in ranges:
+    for num in sorted_invalids:
+        if num > stop:
+            break
+        if num >= start:
+            final_invalids.add(num)
+
+
+print(sum(final_invalids))
