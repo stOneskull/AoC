@@ -1,3 +1,5 @@
+#optimized, generative
+
 with open("input.txt", "r") as file:
     lines = file.read()
 

@@ -1,3 +1,5 @@
+#iterative, brute-force
+
 with open("input.txt", "r") as file:
     lines = file.read()
 

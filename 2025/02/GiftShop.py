@@ -1,3 +1,5 @@
+#optimized, generative
+
 with open("input.txt", "r") as file:
     lines = file.read()
 
@@ -19,7 +21,7 @@ invalids = set()
 
 
 for repeat_len in range(1, max_len//2 + 1):
-    for n in range(10**(repeat_len - 1), 10**repeat_len):
+    for n in range(10**(repeat_len-1), 10**repeat_len):
         repeat = str(n)
         num = int(repeat + repeat)
         if num > max_stop:

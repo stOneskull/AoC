@@ -1,3 +1,5 @@
+#iterative, brute-force
+
 with open("input.txt", "r") as file:
     lines = file.read()
 
@@ -19,7 +21,7 @@ for eachrange in lines:
         for repeat_len in range(1, num_len//2 + 1):
             if num_len % repeat_len == 0:
                 repeat = num_str[:repeat_len]
-                repeats = num_len // repeat_len
+                repeats = num_len//repeat_len
                 if repeat * repeats == num_str:
                     invalids.add(num)
                     break 
