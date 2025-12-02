@@ -3,10 +3,7 @@ with open("input.txt", "r") as file:
 
 lines = [line.strip() for line in lines]
 
-#print(len(lines), len(lines[0])) == 140 x 140
-
-length = len(lines)
-
+grid_height, grid_width = len(lines), len(lines[0])
 
 for row_num, row in enumerate(lines):
     for col_num, char in enumerate(row):
@@ -42,8 +39,8 @@ for dir_row, dir_col in (n, s, w, e):
     next_col = start_col + dir_col
     
     if not (
-        0 <= next_row < length and 
-        0 <= next_col < length
+        0 <= next_row < grid_height and 
+        0 <= next_col < grid_width
         ):
         continue
 
@@ -74,5 +71,6 @@ while current_pos != (start_row, start_col):
     prev_pos = current_pos
     current_pos = next_pos
     steps += 1
+ 
  
 print(steps // 2)
