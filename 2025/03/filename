@@ -1,0 +1,27 @@
+with open("input.txt", "r") as file:
+    lines = file.readlines()
+
+maxes = []
+
+for line in lines:
+    max_num = 0
+    line_len = len(line)
+
+    digits = []
+    pos = 0
+    total_digits = 12
+
+    for i in range(total_digits):
+        remaining = total_digits - i - 1
+        end = line_len - remaining
+        
+        max_num = max(line[pos:end])
+        max_num_i = line.index(max_num, pos, end)
+        
+        digits.append(max_num)
+        pos = max_num_i + 1
+
+    maxes.append(int("".join(digits)))
+
+
+print(sum(maxes))
