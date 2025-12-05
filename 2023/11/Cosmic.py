@@ -1,35 +1,55 @@
+expansion = 1_000_000
+
 with open("input.txt", "r") as file:
-    lines = file.readlines()
+    rows = file.readlines()
 
-rows = [line.strip() for line in lines]
-rows_copy = rows.copy()
+grid = [row.strip() for row in rows]
+
+grid_height = len(grid)
+grid_width = len(grid[0])
 
 
-grid_height = len(rows)
-grid_width = len(rows[0])
+empty_rows = set()
 
-#print(grid_height, grid_width)
-
-for i, row in enumerate(rows_copy):
+for r, row in enumerate(grid):
     if '#' not in row:
-        rows[i] = '2' * grid_width
+        empty_rows.add(r)
 
-for i in range(grid_width):
-    if not any(row[i] == '#' for row in rows_copy):
-        for row in rows:
-            #row[i] = '2'
-            ...
-test = """
-...#......
-.......#..
-#.........
-..........
-......#...
-.#........
-.........#
-..........
-.......#..
-#...#.....
-""".strip().splitlines()
+empty_cols = set()
 
-print(test)
+for c in range(grid_width):
+    if not any(grid[r][c] == '#' for r in range(grid_height)):
+        empty_cols.add(c)
+
+galaxies = []
+
+for r, row in enumerate(grid):
+    for c, char in enumerate(row):
+        if char == '#':
+            galaxies.append((r, c))
+
+
+total_distance = 0
+
+for i in range(len(galaxies)):
+    for j in range(i+1, len(galaxies)):
+        g1_r, g1_c = galaxies[i]
+        g2_r, g2_c = galaxies[j]
+
+        r1, r2 = min(g1_r, g2_r), max(g1_r, g2_r)
+        c1, c2 = min(g1_c, g2_c), max(g1_c, g2_c)
+
+        dist = (r2 - r1) + (c2 - c1)
+
+        for r in range(r1, r2):
+            if r in empty_rows:
+                dist += expansion-1
+
+        for c in range(c1, c2):
+            if c in empty_cols:
+                dist += expansion-1
+        
+        total_distance += dist
+
+
+print(total_distance)
