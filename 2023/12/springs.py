@@ -1,4 +1,4 @@
-from functools import lru_cache
+from functools import cache
 
 
 with open("input.txt", "r") as file:
@@ -14,7 +14,7 @@ for line in lines:
 
 def arrange(guide, nums):
 
-    @lru_cache(maxsize=None)
+    @cache
     def arranger(i, num_i, batch_len):
         if i == len(guide):
             if batch_len == 0 and num_i == len(nums):
