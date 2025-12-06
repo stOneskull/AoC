@@ -6,18 +6,13 @@ lines = [line.strip().split() for line in lines]
 total = 0
 
 for c in range(len(lines[0])):
-    #print(c)
     problem = []
     for line in lines:
         problem.append(line[c])
-    print(problem)
 
-    operator = problem[-1]
+    operator = problem.pop()
 
-    problem = operator.join(problem[:-1])
-
-    print(problem)
-    print(eval(problem))
+    problem = operator.join(problem)
     
     total += eval(problem)
 
