@@ -3,7 +3,7 @@ with open("input.txt", "r") as file:
 
 max_len = max(len(line.strip()) for line in lines)
 
-grid = [line.strip().ljust(max_len) for line in lines]
+grid = [line.strip().ljust(max_len+1) for line in lines]
 
 
 def solve(problem):
@@ -19,15 +19,11 @@ def solve(problem):
 total = 0
 col_start = 0
 
-for c in range(max_len):
+for c in range(max_len+1):
     if all(line[c] == ' ' for line in grid):
         problem = [line[col_start:c] for line in grid]
         total += solve(problem)
         col_start = c + 1
-
-last_problem = [line[col_start:] for line in grid]
-
-total += solve(last_problem)
 
 
 print(total)
