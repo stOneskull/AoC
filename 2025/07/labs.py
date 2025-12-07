@@ -21,4 +21,5 @@ for row in lines[1:]:
     
     beams = next_beams
 
+
 print(splits)

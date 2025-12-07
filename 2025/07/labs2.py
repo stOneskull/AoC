@@ -11,6 +11,7 @@ timelines = Counter({S_index: 1})
 
 for row in lines[1:]:
     next_timelines = Counter()
+
     for c, count in timelines.items():
         if row[c] == '^':
             next_timelines[c-1] += count
@@ -19,6 +20,7 @@ for row in lines[1:]:
             next_timelines[c] += count
     
     timelines = next_timelines
+
 
 total_timelines = sum(timelines.values())
 
