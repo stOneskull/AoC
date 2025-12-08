@@ -42,13 +42,10 @@ pairs = sorted(
 
 circuits = len(boxes)
 
-
 for box1, box2 in pairs:
     if union(box1, box2):
         circuits -= 1
         if circuits == 1:
-            connected = (box1, box2)
             break
 
-
-print(connected[0][0] * connected[1][0])
+print(box1[0] * box2[0])
