@@ -14,9 +14,9 @@ parent = {box: box for box in boxes}
 def distance(p1, p2):
     """Calculates the squared Euclidean distance, avoiding a costly sqrt."""
     return (
-        (p1[0] - p2[0])**2 +
-        (p1[1] - p2[1])**2 +
-        (p1[2] - p2[2])**2
+        (p1[0] - p2[0]) ** 2 +
+        (p1[1] - p2[1]) ** 2 +
+        (p1[2] - p2[2]) ** 2
     )
 
 
